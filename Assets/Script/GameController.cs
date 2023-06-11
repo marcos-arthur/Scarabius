@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log(playerItems[0].Name + " " + playerItems[0].Description +" "+  playerItems[0].ID) ;
-        Debug.Log(playerItems[1].Name + " " + playerItems[1].Description + " " + playerItems[1].ID);
+       /* Debug.Log(playerItems[0].Name + " " + playerItems[0].Description +" "+  playerItems[0].ID) ;
+        Debug.Log(playerItems[1].Name + " " + playerItems[1].Description + " " + playerItems[1].ID);*/
     }
 }
