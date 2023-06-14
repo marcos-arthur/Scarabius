@@ -12,6 +12,7 @@ public class Movement : MonoBehaviour
     public float timeSinceLastShot;
     public GameObject bulletPrefab;
     public Transform firePoint;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>(); // Get the Rigidbody2D component on this object
@@ -27,8 +28,6 @@ public class Movement : MonoBehaviour
         Vector2 movement = new Vector2(horizontalInput, verticalInput);
         if (movement.magnitude > 1) movement.Normalize();
         movement *= moveSpeed;
-
-
 
 
         if (movement != Vector2.zero) rb.MovePosition(rb.position + movement * Time.fixedDeltaTime);

@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
+using static UnityEngine.GraphicsBuffer;
 
+[RequireComponent(typeof(EnemyController))]
 public class MeleeEnemyController : MonoBehaviour
 {
     EnemyController enemyController;
@@ -25,5 +28,10 @@ public class MeleeEnemyController : MonoBehaviour
 
             StartCoroutine(enemyController.attackCooldown());
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // print("Entrou dano");
     }
 }

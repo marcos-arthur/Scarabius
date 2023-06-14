@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4844769003961667365
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2513093146597034682}
-  m_Layer: 0
-  m_Name: FirePoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2513093146597034682
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4844769003961667365}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 571700958310617881}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7365260774337950636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47,9 +16,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: RangedEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 6935228310987208042, guid: b299034d44347e145a5659513f5766af, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 7050877080016445621, guid: b299034d44347e145a5659513f5766af, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7050877080016445621, guid: b299034d44347e145a5659513f5766af, type: 3}
       propertyPath: m_LocalPosition.x
@@ -105,10 +78,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 7050877080016445621, guid: b299034d44347e145a5659513f5766af, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2513093146597034682}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6935228310987208042, guid: b299034d44347e145a5659513f5766af, type: 3}
       insertIndex: -1
@@ -131,8 +101,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25a6062e64f2cc841ba485cef3a331d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &571700958310617881 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7050877080016445621, guid: b299034d44347e145a5659513f5766af, type: 3}
-  m_PrefabInstance: {fileID: 7365260774337950636}
-  m_PrefabAsset: {fileID: 0}
+  shootingPower: 5
+  ProjectilePrefab: {fileID: 307318303174748444, guid: 3256d207cbf2fc44abb73039ca9d12df, type: 3}
