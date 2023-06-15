@@ -32,6 +32,12 @@ public class MeleeEnemyController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // print("Entrou dano");
+        if (collision.tag.Equals("Player"))
+        {
+            // todo
+            print("Dano");
+
+            Destroy(gameObject);
+        }
     }
 }
