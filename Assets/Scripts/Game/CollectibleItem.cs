@@ -61,7 +61,7 @@ public class CollectibleItem : MonoBehaviour
 
 
 
-        Debug.Log(ItemCompendium.Instance.testeCoisa);
+        //Debug.Log(ItemCompendium.Instance.testeCoisa);
 
     }
 
