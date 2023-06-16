@@ -31,6 +31,7 @@ public class EnemyController : MonoBehaviour
     {
         navMeshAgent.speed = speed;
         navMeshAgent.stoppingDistance = stopRange;
+        navMeshAgent.updateRotation = false;
 
         spriteObject.transform.rotation = Quaternion.Euler(90, 0, 0);
 

@@ -36,8 +36,6 @@ public class MeleeEnemyController : MonoBehaviour
         {
             // todo
             print("Dano");
-
-            Destroy(gameObject);
         }
     }
 }

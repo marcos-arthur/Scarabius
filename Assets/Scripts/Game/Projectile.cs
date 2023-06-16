@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag.Equals(isFromEnemy ? "Player" : "Enemy"))
+        if(collision.tag.Equals(isFromEnemy ? "PlayerHitBox" : "Enemy"))
         {
             // todo
             print("Dano");

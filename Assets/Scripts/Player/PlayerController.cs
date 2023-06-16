@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
 public class PlayerController : MonoBehaviour
 {
 
     /*------------------------PUBLIC------------------------*/
 
     Rigidbody2D rb; // Reference to the Rigidbody2D component    
+    Animator animator;
     public GameObject bulletPrefab; // Reference to the Bullet
     public Transform firePoint; // Reference to the player position
 
@@ -37,7 +40,8 @@ public class PlayerController : MonoBehaviour
         maxHearts = 8;
         moveSpeed = 5f;
         shotDelay = 0.25f;
-        rb = this.GetComponent<Rigidbody2D>();  
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
 
         // Starting Mutipliers
@@ -59,10 +63,24 @@ public class PlayerController : MonoBehaviour
         if (movement.magnitude > 1) movement.Normalize();
         movement *= moveSpeed;
 
+        if (movement != Vector2.zero)
+        {
+            rb.MovePosition(rb.position + movement * Time.fixedDeltaTime);
+            animator.SetBool("isWalking", true);
 
-
-
-        if (movement != Vector2.zero) rb.MovePosition(rb.position + movement * Time.fixedDeltaTime);
+            if(horizontalInput > 0)
+            {
+                transform.rotation = Quaternion.Euler(0, -180, 0);
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+        }
 
         timeSinceLastShot += Time.deltaTime;
 
