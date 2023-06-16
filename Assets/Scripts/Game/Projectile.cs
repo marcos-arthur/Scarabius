@@ -8,9 +8,9 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag.Equals(isFromEnemy ? "PlayerHitBox" : "Enemy"))
+        if(collision.tag.Equals(isFromEnemy ? "PlayerHitBox" : "EnemyHitbox"))
         {
-            // todo
+            // TODO
             print("Dano");
 
             Destroy(gameObject);
