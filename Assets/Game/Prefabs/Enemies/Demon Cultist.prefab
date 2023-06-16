@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 434677359083767494, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: m_Name
-      value: Cultist
+      value: Demon Cultist
       objectReference: {fileID: 0}
     - target: {fileID: 571700958310617881, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: m_RootOrder
@@ -71,11 +71,11 @@ PrefabInstance:
     - target: {fileID: 1667515671990314586, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: bc28d5c1fc644404eb1184c2d65d5de2, type: 2}
+      objectReference: {fileID: 9100000, guid: fb7580f7766f9c146af202635808db54, type: 2}
     - target: {fileID: 8799224609491605922, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -1578655160, guid: 9a4796dc330b8da428cba4e0703d407b, type: 3}
+      objectReference: {fileID: 1112693403, guid: d841965742d61ce49bef8e4497d08df8, type: 3}
     - target: {fileID: 8799224609491605922, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: m_Color.b
       value: 1

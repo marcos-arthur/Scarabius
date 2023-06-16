@@ -16,7 +16,8 @@ public class EnemyController : MonoBehaviour
     [Header("References")]
     [SerializeField] private Transform player; // reference to player's transform
     [SerializeField] private GameObject spriteObject;
-
+    
+    private Animator spriteAnimator;
     private NavMeshAgent navMeshAgent;
     
     public bool inRange;
@@ -33,13 +34,14 @@ public class EnemyController : MonoBehaviour
         navMeshAgent.stoppingDistance = stopRange;
         navMeshAgent.updateRotation = false;
 
-        spriteObject.transform.rotation = Quaternion.Euler(90, 0, 0);
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
         if(spriteObject != null)
         {
-            /*spriteObject.transform.position = new Vector3(spriteObject.transform.position.x, spriteObject.transform.position.y, 0);*/
+            spriteObject.transform.rotation = Quaternion.Euler(90, 0, 0);
+
+            spriteAnimator = spriteObject.GetComponent<Animator>();
         }
     }
 
@@ -50,10 +52,22 @@ public class EnemyController : MonoBehaviour
         {
             navMeshAgent.stoppingDistance = stopRange;
             inRange = navMeshAgent.remainingDistance <= attackRange ? true : false;
+
+           /* print($"Remaning: {navMeshAgent.remainingDistance}");
+            print($"Stopping: {navMeshAgent.stoppingDistance}");*/
+            if (Vector3.Distance(transform.position, player.position) <= navMeshAgent.stoppingDistance)
+            {
+                spriteAnimator.SetBool("isWalking", false);
+            }
+            else
+            {
+                spriteAnimator.SetBool("isWalking", true);
+            }
         }
         else
         {
             navMeshAgent.stoppingDistance = 0;
+            spriteAnimator.SetBool("isWalking", true);
         }
 
         navMeshAgent.destination = player.position;
