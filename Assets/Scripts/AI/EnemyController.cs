@@ -6,8 +6,8 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-    [Header("Values")]
-    [SerializeField] private int health = 5;
+    [field: Header("Values")]
+    [field: SerializeField] public int health { get; private set; }
     [SerializeField] public int damage { get; private set; }
     [SerializeField] private float speed = 3.5f; // speed of enemy movement
     [SerializeField] private float stopRange = 5f; // distance from player to stop moving

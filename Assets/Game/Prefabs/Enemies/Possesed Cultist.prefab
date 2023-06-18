@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 571700958310617881, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 571700958310617881, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: m_LocalScale.x
@@ -74,6 +74,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1037342655471881280, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: health
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1037342655471881280, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
+      propertyPath: <health>k__BackingField
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1667515671990314586, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
@@ -161,3 +165,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83722ce8ca33f874b9caf988bfa82a4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  demonOcultistPrefab: {fileID: 5523784228785264417, guid: 7ce307bae8788aa4abf04a8771d31942, type: 3}
