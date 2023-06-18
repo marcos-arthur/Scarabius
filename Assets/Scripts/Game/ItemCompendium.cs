@@ -40,7 +40,6 @@ public class ItemCompendium : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         ItemData item = new("Extra Slot", 0, "Increases the amount of maximum bullets you can shoot before reloading");
         /*  ItemData item2 = new ItemData("Speed Cola", 1, "Increases the move spped of your character");
             ItemData item3 = new ItemData("Health Elixir", 2, "Cures wounds");
@@ -53,6 +52,7 @@ public class ItemCompendium : MonoBehaviour
             ItemData item10 = new ItemData("Unbreakable Cola", 5, "Increases the player damage resistance by 50% for 2 minutes");
             itemGlossary = new List<ItemData>{item, item2, item3, item4, item5, item6, item7, item8, item9, item10 };
         */
+        itemGlossary = new List<ItemCompendium.ItemData>(); 
         itemGlossary.Add(item);
     }
 

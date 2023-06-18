@@ -11,6 +11,8 @@ TagManager:
   - EnemyHitbox
   - Map
   - ChestSpawnPoint
+  - Trap
+  - Chest
   layers:
   - Default
   - TransparentFX

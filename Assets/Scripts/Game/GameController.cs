@@ -11,14 +11,18 @@ public class GameController : MonoBehaviour
     int generator;
     SpriteRenderer aux;
     private CollectibleItem itemScript;
+    public bool gameOver;
+
 
     // Final Variables    
+    public static GameController Instance { get; private set; }
     private List<Scene> maps;
     private ItemCompendium compendium;
 
     // Changeable Variables
     private GameObject[] ChestsSP;    
-    private GameObject map, newMap, newItem, newChest;    
+    private GameObject map, newMap, newItem, newChest;
+    private List<GameObject> enemiesLeft;
 
     // Prefabs
     public GameObject chest,item;
@@ -29,15 +33,32 @@ public class GameController : MonoBehaviour
     public List<Sprite> traps, enemies, obstacles;
 
     // Lists of Possible Spawn Points
- 
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+        DontDestroyOnLoad(gameObject);
+        gameOver = false;
+        maps = new List<Scene>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        Scene scene;
         compendium = ItemCompendium.Instance;
-        foreach (Scene scene in SceneManager.GetAllScenes())
+        for (int i = 0; i < SceneManager.sceneCountInBuildSettings;i++)
         {
-            if(scene.name.Contains("Level")) maps.Add(scene);
+            scene = SceneManager.GetSceneByBuildIndex(i);
+            if (scene.name.Contains("Level")) maps.Add(scene);
         }
         
     }
@@ -79,7 +100,7 @@ public class GameController : MonoBehaviour
             }
         }
     }
-    void openChest(GameObject chest)
+    public void openChest(GameObject chest)
     {        
         newItem = Instantiate(item, new Vector3(chest.transform.position.x, chest.transform.position.y,transform.position.z), Quaternion.identity);
         generator = Random.Range(0, compendium.itemGlossary.Count);
@@ -87,5 +108,7 @@ public class GameController : MonoBehaviour
         itemScript = newItem.GetComponent<CollectibleItem>();
         aux.sprite = compendium.sprites[generator];
         itemScript.currentItem = compendium.itemGlossary[generator];
+        Destroy(chest);
     }
+
 }
