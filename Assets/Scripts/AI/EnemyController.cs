@@ -76,7 +76,6 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        print($"damage: {damage}");
         health -= damage;
 
         if(health <= 0)
