@@ -14,17 +14,12 @@ public class MeleeEnemyController : MonoBehaviour
         enemyController = GetComponent<EnemyController>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        attack();
-    }
-
     void attack()
     {
         if (!enemyController.inCooldown && enemyController.inRange)
         {
             print("attack");
+            // todo: deal damage in player
 
             StartCoroutine(enemyController.attackCooldown());
         }
@@ -34,8 +29,7 @@ public class MeleeEnemyController : MonoBehaviour
     {
         if (collision.tag.Equals("Player"))
         {
-            // todo
-            print("Dano");
+            attack();
         }
     }
 }

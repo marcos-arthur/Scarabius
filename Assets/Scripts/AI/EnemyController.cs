@@ -6,8 +6,9 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-    [Header("Values")]
-    [SerializeField] private int health = 5;
+    [field: Header("Values")]
+    [field: SerializeField] public int health { get; private set; }
+    [SerializeField] public int damage { get; private set; }
     [SerializeField] private float speed = 3.5f; // speed of enemy movement
     [SerializeField] private float stopRange = 5f; // distance from player to stop moving
     [SerializeField] private float attackRange = 5f; // distance from player to stop moving
@@ -16,7 +17,8 @@ public class EnemyController : MonoBehaviour
     [Header("References")]
     [SerializeField] private Transform player; // reference to player's transform
     [SerializeField] private GameObject spriteObject;
-
+    
+    private Animator spriteAnimator;
     private NavMeshAgent navMeshAgent;
     
     public bool inRange;
@@ -33,13 +35,14 @@ public class EnemyController : MonoBehaviour
         navMeshAgent.stoppingDistance = stopRange;
         navMeshAgent.updateRotation = false;
 
-        spriteObject.transform.rotation = Quaternion.Euler(90, 0, 0);
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
         if(spriteObject != null)
         {
-            /*spriteObject.transform.position = new Vector3(spriteObject.transform.position.x, spriteObject.transform.position.y, 0);*/
+            spriteObject.transform.rotation = Quaternion.Euler(90, 0, 0);
+
+            spriteAnimator = spriteObject.GetComponent<Animator>();
         }
     }
 
@@ -50,13 +53,37 @@ public class EnemyController : MonoBehaviour
         {
             navMeshAgent.stoppingDistance = stopRange;
             inRange = navMeshAgent.remainingDistance <= attackRange ? true : false;
+
+           /* print($"Remaning: {navMeshAgent.remainingDistance}");
+            print($"Stopping: {navMeshAgent.stoppingDistance}");*/
+            if (Vector3.Distance(transform.position, player.position) <= navMeshAgent.stoppingDistance)
+            {
+                spriteAnimator.SetBool("isWalking", false);
+            }
+            else
+            {
+                spriteAnimator.SetBool("isWalking", true);
+            }
         }
         else
         {
             navMeshAgent.stoppingDistance = 0;
+            spriteAnimator.SetBool("isWalking", true);
         }
 
         navMeshAgent.destination = player.position;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+
+        if(health <= 0)
+        {
+            // todo: death
+
+            Destroy(gameObject);
+        }
     }
 
     public Vector3 GetPlayerPosition()
@@ -77,13 +104,5 @@ public class EnemyController : MonoBehaviour
         inCooldown = true;
         yield return new WaitForSeconds(cooldown);
         inCooldown = false;
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Bullet")
-        {
-            Destroy(collision.gameObject);
-        }
     }
 }

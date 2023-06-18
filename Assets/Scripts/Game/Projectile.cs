@@ -5,17 +5,24 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public bool isFromEnemy = true;
+    [field: SerializeField] public int damage { get; set; }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag.Equals(isFromEnemy ? "PlayerHitBox" : "Enemy"))
+
+        if (isFromEnemy && collision.tag.Equals("PlayerHitBox"))
         {
-            // todo
-            print("Dano");
+            // todo: player take damage 
 
             Destroy(gameObject);
         }
-        else if (collision.tag.Equals("Wall"))
+        else if(!isFromEnemy && collision.tag.Equals("EnemyHitbox"))
+        {
+            collision.gameObject.GetComponentInParent<EnemyController>().TakeDamage(damage);
+            Destroy(gameObject);
+        }
+        
+        if (collision.tag.Equals("Wall"))
         {
             Destroy(gameObject);
         }

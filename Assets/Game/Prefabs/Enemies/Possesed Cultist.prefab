@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 434677359083767494, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: m_Name
-      value: Cultist
+      value: Possesed Cultist
       objectReference: {fileID: 0}
     - target: {fileID: 571700958310617881, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: m_RootOrder
@@ -30,11 +30,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 571700958310617881, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.6143632
+      value: -1.7730227
       objectReference: {fileID: 0}
     - target: {fileID: 571700958310617881, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.1048727
+      value: 0.99494195
       objectReference: {fileID: 0}
     - target: {fileID: 571700958310617881, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -74,31 +74,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1037342655471881280, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: health
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1037342655471881280, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: <health>k__BackingField
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1667515671990314586, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: bc28d5c1fc644404eb1184c2d65d5de2, type: 2}
+      objectReference: {fileID: 9100000, guid: fb7580f7766f9c146af202635808db54, type: 2}
     - target: {fileID: 1964936651010695120, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: m_Size.x
-      value: 0.67766833
+      value: 0.72626877
       objectReference: {fileID: 0}
     - target: {fileID: 1964936651010695120, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: m_Size.y
-      value: 1.3029385
+      value: 1.2961786
       objectReference: {fileID: 0}
     - target: {fileID: 1964936651010695120, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: m_Offset.x
-      value: 0.010855556
+      value: 0.00010228157
       objectReference: {fileID: 0}
     - target: {fileID: 1964936651010695120, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: m_Offset.y
-      value: -0.0151975155
+      value: -0.018577337
       objectReference: {fileID: 0}
     - target: {fileID: 1964936651010695120, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
@@ -110,24 +110,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4659617748673561218, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: m_Size.x
-      value: 0.70695245
+      value: 0.68053293
       objectReference: {fileID: 0}
     - target: {fileID: 4659617748673561218, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: m_Size.y
-      value: 1.2232742
+      value: 1.2236269
       objectReference: {fileID: 0}
     - target: {fileID: 4659617748673561218, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: m_Center.x
-      value: 0.00697726
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4659617748673561218, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: m_Center.y
-      value: -0.020931989
+      value: -0.009584039
       objectReference: {fileID: 0}
     - target: {fileID: 8799224609491605922, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -1578655160, guid: 9a4796dc330b8da428cba4e0703d407b, type: 3}
+      objectReference: {fileID: 1112693403, guid: d841965742d61ce49bef8e4497d08df8, type: 3}
     - target: {fileID: 8799224609491605922, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -140,9 +140,29 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4659617748673561218, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 434677359083767494, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1138987650267387654}
   m_SourcePrefab: {fileID: 100100000, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
+--- !u!1 &2571158382886245827 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 434677359083767494, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
+  m_PrefabInstance: {fileID: 2713100108062528261}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1138987650267387654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2571158382886245827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83722ce8ca33f874b9caf988bfa82a4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  demonOcultistPrefab: {fileID: 5523784228785264417, guid: 7ce307bae8788aa4abf04a8771d31942, type: 3}
