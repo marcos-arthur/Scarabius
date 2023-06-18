@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
@@ -13,6 +14,10 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     public GameObject bulletPrefab; // Reference to the Bullet
     public Transform firePoint; // Reference to the player position
+
+    [SerializeField] public Image[] heart;
+    public Sprite full;
+    public Sprite empty;
 
 
     /*------------------------PRIVATE-----------------------*/
@@ -37,8 +42,8 @@ public class PlayerController : MonoBehaviour
         // Starting Values
         maxBullets = 6;
         bulletsInChamber = 6;
-        hearts = 8;
-        maxHearts = 8;
+        hearts = 3;
+        maxHearts = 3;
         moveSpeed = 5f;
         shotDelay = 0.25f;
         rb = GetComponent<Rigidbody2D>();
@@ -75,8 +80,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        
+
         if (!gameController.gameOver)
         {
+            HealthLogic();
+
             // Get the horizontal and vertical input axis values (left/right arrow and up/down arrow keys)
             float horizontalInput = Input.GetAxisRaw("Horizontal");
             float verticalInput = Input.GetAxisRaw("Vertical");
@@ -132,6 +141,36 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    void HealthLogic (){
+
+        if (hearts > maxHearts)
+        {
+            hearts = maxHearts;
+        }
+
+        for (int i = 0; i < heart.Length; i++)
+        {
+            if (i < hearts)
+            {   
+                heart[i].sprite = full;
+            }
+            else
+            {
+                heart[i].sprite = empty;
+            }
+            
+            if (i < maxHearts)
+            {
+                heart[i].enabled = true;
+            }
+            else
+            {
+                heart[i].enabled = false;
+            }
+        }
+    } 
+
     // Method for applying the determined changes depending on used item
     void useItem()
     {
