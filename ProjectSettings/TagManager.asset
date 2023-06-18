@@ -9,6 +9,10 @@ TagManager:
   - Wall
   - PlayerHitBox
   - EnemyHitbox
+  - Map
+  - ChestSpawnPoint
+  - Trap
+  - Chest
   layers:
   - Default
   - TransparentFX
