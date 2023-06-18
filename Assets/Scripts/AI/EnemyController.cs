@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour
 {
     [Header("Values")]
     [SerializeField] private int health = 5;
-    [SerializeField] private int damage = 5;
+    [SerializeField] public int damage { get; private set; }
     [SerializeField] private float speed = 3.5f; // speed of enemy movement
     [SerializeField] private float stopRange = 5f; // distance from player to stop moving
     [SerializeField] private float attackRange = 5f; // distance from player to stop moving
@@ -74,10 +74,17 @@ public class EnemyController : MonoBehaviour
         navMeshAgent.destination = player.position;
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int damage)
     {
-        // TODO
+        print($"damage: {damage}");
+        health -= damage;
 
+        if(health <= 0)
+        {
+            // todo: death
+
+            Destroy(gameObject);
+        }
     }
 
     public Vector3 GetPlayerPosition()
@@ -98,13 +105,5 @@ public class EnemyController : MonoBehaviour
         inCooldown = true;
         yield return new WaitForSeconds(cooldown);
         inCooldown = false;
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Bullet")
-        {
-            Destroy(collision.gameObject);
-        }
     }
 }

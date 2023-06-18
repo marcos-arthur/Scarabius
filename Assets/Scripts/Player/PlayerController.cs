@@ -89,21 +89,23 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0, 0, 0));
+                Projectile bulletController = bullet.GetComponent<Projectile>();
+
+                bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(1, 0) * 25f;
+                bulletController.isFromEnemy = false;
+                bulletController.damage = 1;
+
                 timeSinceLastShot = 0;
             }
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0, 0, 180));
-                timeSinceLastShot = 0;
-            }
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0, 0, 90));
-                timeSinceLastShot = 0;
-            }
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0, 0, -90));
+                Projectile bulletController = bullet.GetComponent<Projectile>();
+                
+                bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(-1, 0) * 25f;
+                bullet.GetComponent<Projectile>().isFromEnemy = false;
+                bulletController.damage = 1;
+
                 timeSinceLastShot = 0;
             }
         }

@@ -76,6 +76,14 @@ PrefabInstance:
       propertyPath: stoppingDistance
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 9039413708302543996, guid: b299034d44347e145a5659513f5766af, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9039413708302543996, guid: b299034d44347e145a5659513f5766af, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -102,4 +110,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootingPower: 5
-  ProjectilePrefab: {fileID: 307318303174748444, guid: 3256d207cbf2fc44abb73039ca9d12df, type: 3}
+  ProjectilePrefab: {fileID: 401111474765264507, guid: bbbfb5329ebb99a4b8fb58d0317546f4, type: 3}

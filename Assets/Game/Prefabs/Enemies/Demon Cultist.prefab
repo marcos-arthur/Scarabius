@@ -12,13 +12,37 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: c88837c988762bc4397e1fef4fda835a, type: 2}
+    - target: {fileID: 3306697558622635001, guid: acfd7c3c5537ca540be357bcdb42b0db, type: 3}
+      propertyPath: m_Size.x
+      value: 0.9290147
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306697558622635001, guid: acfd7c3c5537ca540be357bcdb42b0db, type: 3}
+      propertyPath: m_Size.y
+      value: 1.2965771
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306697558622635001, guid: acfd7c3c5537ca540be357bcdb42b0db, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.011026859
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306697558622635001, guid: acfd7c3c5537ca540be357bcdb42b0db, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.0110268
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306697558622635001, guid: acfd7c3c5537ca540be357bcdb42b0db, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.3333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3306697558622635001, guid: acfd7c3c5537ca540be357bcdb42b0db, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.3333334
+      objectReference: {fileID: 0}
     - target: {fileID: 3508071359218326255, guid: acfd7c3c5537ca540be357bcdb42b0db, type: 3}
       propertyPath: m_Name
-      value: Demon Cultist Transformed
+      value: Demon Cultist
       objectReference: {fileID: 0}
     - target: {fileID: 3551214130891525936, guid: acfd7c3c5537ca540be357bcdb42b0db, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3551214130891525936, guid: acfd7c3c5537ca540be357bcdb42b0db, type: 3}
       propertyPath: m_LocalScale.x
@@ -34,11 +58,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3551214130891525936, guid: acfd7c3c5537ca540be357bcdb42b0db, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.48
+      value: 0.9752474
       objectReference: {fileID: 0}
     - target: {fileID: 3551214130891525936, guid: acfd7c3c5537ca540be357bcdb42b0db, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.31
+      value: 2.09425
       objectReference: {fileID: 0}
     - target: {fileID: 3551214130891525936, guid: acfd7c3c5537ca540be357bcdb42b0db, type: 3}
       propertyPath: m_LocalPosition.z
@@ -99,6 +123,18 @@ PrefabInstance:
     - target: {fileID: 5528807052759434635, guid: acfd7c3c5537ca540be357bcdb42b0db, type: 3}
       propertyPath: m_Color.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7391816767292754484, guid: acfd7c3c5537ca540be357bcdb42b0db, type: 3}
+      propertyPath: m_Radius
+      value: 0.71192074
+      objectReference: {fileID: 0}
+    - target: {fileID: 7391816767292754484, guid: acfd7c3c5537ca540be357bcdb42b0db, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.00000011920929
+      objectReference: {fileID: 0}
+    - target: {fileID: 7391816767292754484, guid: acfd7c3c5537ca540be357bcdb42b0db, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.023701668
       objectReference: {fileID: 0}
     - target: {fileID: 8506504982637502123, guid: acfd7c3c5537ca540be357bcdb42b0db, type: 3}
       propertyPath: m_Size.x

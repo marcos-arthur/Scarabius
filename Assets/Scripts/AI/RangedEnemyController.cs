@@ -19,6 +19,7 @@ public class RangedEnemyController : MonoBehaviour
     void Start()
     {
         enemyController = GetComponent<EnemyController>();
+        ProjectilePrefab.GetComponent<Projectile>().damage = enemyController.damage;
 
         if(ProjectilePrefab != null )
         {
