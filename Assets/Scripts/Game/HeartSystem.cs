@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class HeartSystem : MonoBehaviour
 {
     public int life;
-    puplic item maxLife;
+    // puplic item maxLife;
 
     public Image[] heart;
     public Sprite cheio;
