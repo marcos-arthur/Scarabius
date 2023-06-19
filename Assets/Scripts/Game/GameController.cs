@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour
     public static GameController Instance { get; private set; }
     private List<Scene> maps;
     private ItemCompendium compendium;
+    private List<string> mapsPointer =  new List<string>{ "1", "2", "3", "4", "5" };
 
     // Changeable Variables
     private GameObject[] ChestsSP;    
@@ -52,18 +53,28 @@ public class GameController : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-        Scene scene;
+    {        
         compendium = ItemCompendium.Instance;
+        /* Scene scene;
         for (int i = 0; i < SceneManager.sceneCountInBuildSettings;i++)
         {
             scene = SceneManager.GetSceneByBuildIndex(i);
-            if (scene.name.Contains("Level")) maps.Add(scene);
-        }
+            if (scene.name.Contains("Level_")) maps.Add(scene);
+            Debug.Log(scene.name);
+            Debug.Log(maps.Count);
+        }*/
+
+        loadMap();
         
     }
 
-    
+    void generateMap(Scene scene, LoadSceneMode mode)
+    {        
+            map = GameObject.FindWithTag("Map");
+            ChestsSP = GameObject.FindGameObjectsWithTag("ChestSpawnPoint");
+            generateChests();
+        
+    }
 
     // Update is called once per frame
     void FixedUpdate()
@@ -72,27 +83,19 @@ public class GameController : MonoBehaviour
         Debug.Log(playerItems[1].Name + " " + playerItems[1].Description + " " + playerItems[1].ID);*/
     }
 
-    void generateMap()
+    void loadMap()
     {
-        generator = Random.Range(0, maps.Count);
-        SceneManager.LoadScene(maps[generator].ToString());
-        maps.Remove(maps[generator]);
-        map = GameObject.FindWithTag("Map");
-        ChestsSP = GameObject.FindGameObjectsWithTag("ChestSpawnPoint");
-
-        /*
-        generator = Random.Range(0, maps.Count);
-        newMap = Instantiate(newMap, new Vector3(0, 0, 0), Quaternion.identity);
-        aux = newMap.GetComponent<SpriteRenderer>();
-        aux.sprite = maps[generator];
-        */
-        generateChests();
+        generator = Random.Range(0, mapsPointer.Count);
+        SceneManager.LoadScene("Level_" + mapsPointer[generator]);
+        mapsPointer.Remove(mapsPointer[generator]);
+        SceneManager.sceneLoaded += generateMap;
     }
     void generateChests()
     {
         foreach (GameObject chestSP in ChestsSP)
         {
-            generator = Random.Range(0, 1);
+            //generator = Random.Range(0, 2);            
+            generator = 1;
             if (generator == 1)
             {
                 newChest = Instantiate(chest, chestSP.transform.position, Quaternion.identity);
@@ -101,8 +104,10 @@ public class GameController : MonoBehaviour
         }
     }
     public void openChest(GameObject chest)
-    {        
-        newItem = Instantiate(item, new Vector3(chest.transform.position.x, chest.transform.position.y,transform.position.z), Quaternion.identity);
+    {
+        Debug.Log(chest);
+        Debug.Log("Você Abriu um baú");
+        newItem = Instantiate(item, chest.transform.position, Quaternion.identity);
         generator = Random.Range(0, compendium.itemGlossary.Count);
         aux = newItem.GetComponent<SpriteRenderer>();
         itemScript = newItem.GetComponent<CollectibleItem>();

@@ -325,6 +325,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c7cc2fa748f4c04aa2d722d0b016542, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: 8d6316986e56fe14682b5d95eca55d71, type: 3}
 --- !u!114 &871693558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,6 +339,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2496d0e7189f6747a6f816d58bfc7dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOver: 0
+  chest: {fileID: 684899681539330483, guid: 788e877c7fb3d80439e11aa544c3f2c9, type: 3}
+  item: {fileID: 8078643223800959018, guid: 74a5a3c21afc9d24bab5f1070a5ef5dd, type: 3}
+  traps: []
+  enemies: []
+  obstacles: []
 --- !u!4 &871693559
 Transform:
   m_ObjectHideFlags: 0
@@ -1483,7 +1491,7 @@ GameObject:
   - component: {fileID: 1334182532}
   m_Layer: 0
   m_Name: GameObject
-  m_TagString: Untagged
+  m_TagString: ChestSpawnPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1496,7 +1504,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1334182531}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 1.435, z: -0.02923833}
+  m_LocalPosition: {x: 0, y: 0, z: -0.02923833}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1576,7 +1584,7 @@ GameObject:
   - component: {fileID: 1609228023}
   m_Layer: 0
   m_Name: Map
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

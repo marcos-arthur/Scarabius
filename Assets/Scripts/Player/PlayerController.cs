@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,7 +30,12 @@ public class PlayerController : MonoBehaviour
 
     // Changeable Values
     [SerializeField] private int bulletsInChamber, maxBullets;
-    [SerializeField] private int hearts, maxHearts;
+    [SerializeField] private int hearts,maxHearts;
+    private bool invincible,isSpaceDown;
+    private ItemCompendium.ItemData collectedItem;
+    private CollectibleItem itemScript;
+    private float bTimer;
+
 
     // Mutipliers
     [SerializeField] private float moveSpeed;
@@ -61,6 +68,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         gameController = GameController.Instance;
+        invincible = false;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -69,13 +77,20 @@ public class PlayerController : MonoBehaviour
         {
             this.damagePlayer(1);
         }
-        else if (collision.gameObject.tag.Equals("Chest"))
+        if (isSpaceDown)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            Debug.Log("Voc� apertou espa�o");
+            if (collision.gameObject.tag.Equals("Chest"))            
             {
                 gameController.openChest(collision.gameObject);
             }
+            else if (collision.gameObject.tag.Equals("Item"))
+            {
+                this.collectItem(collision.gameObject);
+            }
+            
         }
+        
     }
 
     // Update is called once per frame
@@ -138,6 +153,23 @@ public class PlayerController : MonoBehaviour
                     bulletController.damage = 1;
                 }
             }
+            isSpaceDown = Input.GetKeyDown(KeyCode.Space);
+            if (isSpaceDown)
+            {
+                bTimer += Time.deltaTime;
+                if (bTimer > 0.3)
+                {
+                    isSpaceDown = false;
+                }
+            }
+            else
+            {
+                bTimer = 0;
+            }
+            if (Input.GetKeyDown(KeyCode.F) && collectedItem.ID != -1)
+            {
+                useItem();
+            }
         }
     }
     void HealthLogic()
@@ -173,55 +205,73 @@ public class PlayerController : MonoBehaviour
     // Method for applying the determined changes depending on used item
     void useItem()
     {
-        if (false) // Max Bullets Buff
+        if (collectedItem.ID == 0) // Max Bullets Buff
         {
             maxBullets++;
         }
-        else if (false) // Move Speed Buff
+        else if (collectedItem.ID == 1) // Move Speed Buff
         {
             moveSpeed += 2;
         }
-        else if (false) // Max Health Buff
+        else if (collectedItem.ID == 2) // Max Health Buff
         {
             maxHearts += 1;
         }
-        else if (false) // Health Potion
+        else if (collectedItem.ID == 3) // Health Potion
         {
             if (hearts < maxHearts) hearts += 1;
         }
-        else if (false) // Resistance Buff
+        else if (collectedItem.ID == 4) // Resistance Buff
         {
             if (resistance >= 0.05) resistance -= 0.05;
         }
-        else if (false) // Attack Speed Buff
+        else if (collectedItem.ID == 5) // Attack Speed Buff
         {
             attackSpeed += 0.05;
         }
-        else if (false) // Bullets Output Buff
+        else if (collectedItem.ID == 6) // Bullets Output Buff
         {
             bulletsOutput *= 2;
         }
-        else if (false) // Reflecting Attacks Consumable
+        else if (collectedItem.ID == 7) // Reflecting Attacks Consumable
         {
             reflectingTimer = 120f;
         }
-        else if (false) // Invisibility Consumer
+        else if (collectedItem.ID == 8) // Invisibility Consumer
         {
             invisibleTimer = 120f;
         }
-        else if (false) // Shield Consumable
+        else if (collectedItem.ID == 9) // Shield Consumable
         {
             resistantTimer = 120f;
             if ((resistance - 0.5) >= 0.05) resistance -= 0.5;
             else resistance -= 0.5 - (resistance - 0.55);
         }
+        collectedItem = new ItemCompendium.ItemData("NULL",-1,"NULL");
+        Debug.Log("Usei um Item");
     }
     void damagePlayer(int damage)
     {
-        hearts -= damage;
-        if (hearts <= 0)
+        if (!invincible)
         {
-            gameController.gameOver = true;
+            hearts -= damage;           
+            if (hearts <= 0)
+            {
+                gameController.gameOver = true;
+            }
+            StartCoroutine(StartInvincible());
         }
+    }
+    void collectItem(GameObject item)
+    {
+        itemScript = item.GetComponent<CollectibleItem>();
+        collectedItem = itemScript.currentItem;
+        Debug.Log("Coletei um Item");
+    }
+    private IEnumerator StartInvincible()
+    {
+        invincible = true;
+        yield return new WaitForSeconds(1f);
+        invincible = false;
     }
 }
