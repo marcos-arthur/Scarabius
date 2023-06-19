@@ -14,22 +14,20 @@ public class MeleeEnemyController : MonoBehaviour
         enemyController = GetComponent<EnemyController>();
     }
 
-    void attack()
+    void attack(PlayerController Player)
     {
         if (!enemyController.inCooldown && enemyController.inRange)
         {
-            print("attack");
-            // todo: deal damage in player
-
+            Player.damagePlayer(enemyController.damage);
             StartCoroutine(enemyController.attackCooldown());
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag.Equals("Player"))
+        if (collision.tag.Equals("PlayerHitBox"))
         {
-            attack();
+            attack(collision.gameObject.GetComponentInParent<PlayerController>());
         }
     }
 }

@@ -81,6 +81,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1037342655471881280, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
+      propertyPath: <damage>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1037342655471881280, guid: 832490de9a9b45b44970d9f7d881734f, type: 3}
       propertyPath: <health>k__BackingField
       value: 1
       objectReference: {fileID: 0}

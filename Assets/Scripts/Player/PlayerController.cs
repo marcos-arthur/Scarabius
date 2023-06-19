@@ -72,10 +72,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag.Equals("Trap"))
+        /*if (collision.gameObject.tag.Equals("Trap"))
         {
             this.damagePlayer(1);
-        }               
+        }     */          
     }
 
     // Update is called once per frame
@@ -223,7 +223,7 @@ public class PlayerController : MonoBehaviour
         collectedItem = new ItemCompendium.ItemData("NULL",-1,"NULL");
         Debug.Log("Agora estou com o Item " + collectedItem.Name);
     }
-    void damagePlayer(int damage)
+    public void damagePlayer(int damage)
     {
         if (!invincible)
         {

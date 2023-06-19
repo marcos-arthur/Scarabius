@@ -22,7 +22,8 @@ public class GameController : MonoBehaviour
 
     // Changeable Variables
     private GameObject[] ChestsSP, enemiesLeft;    
-    private GameObject map, newMap, newItem, newChest,lockedDoor;    
+    [SerializeField] private GameObject map, newMap, newItem, newChest;
+    [SerializeField] public GameObject lockedDoor;
 
     // Prefabs
     public GameObject chest,item;
@@ -64,10 +65,14 @@ public class GameController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
-    {            
-       if(!enemiesLeft.IsUnityNull() && enemiesLeft.Length > 0) enemiesLeft = GameObject.FindGameObjectsWithTag("Enemy");
-       else if(lockedDoor.activeSelf == false)
+    void Update()
+    {
+        print($"AQUI {lockedDoor.activeSelf}");
+        if (!enemiesLeft.IsUnityNull() && enemiesLeft.Length > 0)
+        {
+            enemiesLeft = GameObject.FindGameObjectsWithTag("Enemy");
+        }
+        else if (lockedDoor.activeSelf == false)
         {
             openDoor();
         }
@@ -75,17 +80,22 @@ public class GameController : MonoBehaviour
     void generateMap(Scene scene, LoadSceneMode mode)
     {
         enemiesLeft = GameObject.FindGameObjectsWithTag("Enemy");
-        lockedDoor = GameObject.FindGameObjectWithTag("LockedDoor");
+        /*lockedDoor = GameObject.FindGameObjectWithTag("LockedDoor");
+        print($"lockedDoor{lockedDoor}");
+        lockedDoor.SetActive(false);*/
         map = GameObject.FindGameObjectWithTag("Map");
         ChestsSP = GameObject.FindGameObjectsWithTag("ChestSpawnPoint");
         generateChests();
-        lockedDoor.SetActive(false);
     }
 
     public void loadMap()
     {
-        generator = Random.Range(0, mapsPointer.Count+1);
-        SceneManager.LoadScene("Level_" + mapsPointer[generator]);  
+        if(mapsPointer.Count <= 0)
+        {
+            gameOver = true;
+        }
+        generator = Random.Range(1, mapsPointer.Count) - 1;
+        SceneManager.LoadScene("Level_" + mapsPointer[generator]);
         mapsPointer.Remove(mapsPointer[generator]);
         SceneManager.sceneLoaded += generateMap;
     }
@@ -113,6 +123,6 @@ public class GameController : MonoBehaviour
     }
     void openDoor()
     {
-        lockedDoor.active = true;
+        lockedDoor.SetActive(true);
     }
 }
