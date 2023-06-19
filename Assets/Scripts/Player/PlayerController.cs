@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
@@ -14,15 +15,20 @@ public class PlayerController : MonoBehaviour
     public GameObject bulletPrefab; // Reference to the Bullet
     public Transform firePoint; // Reference to the player position
 
+    [SerializeField] public Image[] heart;
+    public Sprite full;
+    public Sprite empty;
+
 
     /*------------------------PRIVATE-----------------------*/
 
     // Static Values
     [SerializeField] private double shotDelay, timeSinceLastShot;
+    [SerializeField] GameController gameController;
 
     // Changeable Values
     [SerializeField] private int bulletsInChamber, maxBullets;
-    [SerializeField] private int hearts,maxHearts;
+    [SerializeField] private int hearts, maxHearts;
 
     // Mutipliers
     [SerializeField] private float moveSpeed;
@@ -36,12 +42,13 @@ public class PlayerController : MonoBehaviour
         // Starting Values
         maxBullets = 6;
         bulletsInChamber = 6;
-        hearts = 8;
-        maxHearts = 8;
+        hearts = 3;
+        maxHearts = 3;
         moveSpeed = 5f;
         shotDelay = 0.25f;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
 
 
         // Starting Mutipliers
@@ -51,111 +58,170 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        gameController = GameController.Instance;
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag.Equals("Trap"))
+        {
+            this.damagePlayer(1);
+        }
+        else if (collision.gameObject.tag.Equals("Chest"))
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                gameController.openChest(collision.gameObject);
+            }
+        }
+    }
+
     // Update is called once per frame
     private void Update()
     {
-        // Get the horizontal and vertical input axis values (left/right arrow and up/down arrow keys)
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        float verticalInput = Input.GetAxisRaw("Vertical");
-
-        // Calculate the movement vector based on the input values and the moveSpeed
-        Vector2 movement = new Vector2(horizontalInput, verticalInput);
-        if (movement.magnitude > 1) movement.Normalize();
-        movement *= moveSpeed;
-
-        if (movement != Vector2.zero)
+        if (!gameController.gameOver)
         {
-            rb.MovePosition(rb.position + movement * Time.fixedDeltaTime);
-            animator.SetBool("isWalking", true);
+            HealthLogic();
 
-            if(horizontalInput > 0)
+            // Get the horizontal and vertical input axis values (left/right arrow and up/down arrow keys)
+            float horizontalInput = Input.GetAxisRaw("Horizontal");
+            float verticalInput = Input.GetAxisRaw("Vertical");
+
+            // Calculate the movement vector based on the input values and the moveSpeed
+            Vector2 movement = new Vector2(horizontalInput, verticalInput);
+            if (movement.magnitude > 1) movement.Normalize();
+            movement *= moveSpeed;
+
+            if (movement != Vector2.zero)
             {
-                transform.rotation = Quaternion.Euler(0, -180, 0);
+                rb.MovePosition(rb.position + movement * Time.fixedDeltaTime);
+                animator.SetBool("isWalking", true);
+
+                if (horizontalInput > 0)
+                {
+                    transform.rotation = Quaternion.Euler(0, -180, 0);
+                }
+                else
+                {
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                }
             }
             else
             {
-                transform.rotation = Quaternion.Euler(0, 0, 0);
+                animator.SetBool("isWalking", false);
+            }
+
+            timeSinceLastShot += Time.deltaTime;
+
+            if (timeSinceLastShot > shotDelay)
+            {
+                if (Input.GetKeyDown(KeyCode.RightArrow))
+                {
+                    GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0, 0, 0));
+                    Projectile bulletController = bullet.GetComponent<Projectile>();
+
+                    bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(1, 0) * 25f;
+                    bulletController.isFromEnemy = false;
+                    bulletController.damage = 1;
+
+                    timeSinceLastShot = 0;
+                }
+                if (Input.GetKeyDown(KeyCode.LeftArrow))
+                {
+                    GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0, 0, 180));
+                    Projectile bulletController = bullet.GetComponent<Projectile>();
+
+                    bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(-1, 0) * 25f;
+                    bullet.GetComponent<Projectile>().isFromEnemy = false;
+                    bulletController.damage = 1;
+                }
             }
         }
-        else
+    }
+    void HealthLogic()
+    {
+
+        if (hearts > maxHearts)
         {
-            animator.SetBool("isWalking", false);
+            hearts = maxHearts;
         }
 
-        timeSinceLastShot += Time.deltaTime;
-
-        if (timeSinceLastShot > shotDelay)
+        for (int i = 0; i < heart.Length; i++)
         {
-            if (Input.GetKeyDown(KeyCode.RightArrow))
+            if (i < hearts)
             {
-                GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0, 0, 0));
-                Projectile bulletController = bullet.GetComponent<Projectile>();
-
-                bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(1, 0) * 25f;
-                bulletController.isFromEnemy = false;
-                bulletController.damage = 1;
-
-                timeSinceLastShot = 0;
+                heart[i].sprite = full;
             }
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            else
             {
-                GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.Euler(0, 0, 180));
-                Projectile bulletController = bullet.GetComponent<Projectile>();
-                
-                bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(-1, 0) * 25f;
-                bullet.GetComponent<Projectile>().isFromEnemy = false;
-                bulletController.damage = 1;
+                heart[i].sprite = empty;
+            }
 
-                timeSinceLastShot = 0;
+            if (i < maxHearts)
+            {
+                heart[i].enabled = true;
+            }
+            else
+            {
+                heart[i].enabled = false;
             }
         }
+    }
 
-
-        // Method for applying the detemrined changes depending on used item
-        void useItem()
+    // Method for applying the determined changes depending on used item
+    void useItem()
+    {
+        if (false) // Max Bullets Buff
         {
-            if (false) // Max Bullets Buff
-            {
-                maxBullets++;
-            }
-            else if (false) // Move Speed Buff
-            {
-                moveSpeed += 2;
-            }
-            else if (false) // Max Health Buff
-            {
-                maxHearts += 1;
-            }
-            else if (false) // Health Potion
-            {
-                if (hearts < maxHearts) hearts += 1;
-            }
-            else if (false) // Resistance Buff
-            {
-                if (resistance >= 0.05) resistance -= 0.05;
-            }
-            else if (false) // Attack Speed Buff
-            {
-                attackSpeed += 0.05;
-            }
-            else if (false) // Bullets Output Buff
-            {
-                bulletsOutput*=2;
-            }
-            else if (false) // Reflecting Attacks Consumable
-            {
-                reflectingTimer = 120f;
-            }
-            else if (false) // Invisibility Consumer
-            {
-                invisibleTimer = 120f;
-            }
-            else if (false) // Shield Consumable
-            {
-                resistantTimer = 120f;
-                if ((resistance - 0.5) >= 0.05) resistance -= 0.5;
-                else resistance -= 0.5 - (resistance - 0.55);
-            }
+            maxBullets++;
+        }
+        else if (false) // Move Speed Buff
+        {
+            moveSpeed += 2;
+        }
+        else if (false) // Max Health Buff
+        {
+            maxHearts += 1;
+        }
+        else if (false) // Health Potion
+        {
+            if (hearts < maxHearts) hearts += 1;
+        }
+        else if (false) // Resistance Buff
+        {
+            if (resistance >= 0.05) resistance -= 0.05;
+        }
+        else if (false) // Attack Speed Buff
+        {
+            attackSpeed += 0.05;
+        }
+        else if (false) // Bullets Output Buff
+        {
+            bulletsOutput *= 2;
+        }
+        else if (false) // Reflecting Attacks Consumable
+        {
+            reflectingTimer = 120f;
+        }
+        else if (false) // Invisibility Consumer
+        {
+            invisibleTimer = 120f;
+        }
+        else if (false) // Shield Consumable
+        {
+            resistantTimer = 120f;
+            if ((resistance - 0.5) >= 0.05) resistance -= 0.5;
+            else resistance -= 0.5 - (resistance - 0.55);
+        }
+    }
+    void damagePlayer(int damage)
+    {
+        hearts -= damage;
+        if (hearts <= 0)
+        {
+            gameController.gameOver = true;
         }
     }
 }

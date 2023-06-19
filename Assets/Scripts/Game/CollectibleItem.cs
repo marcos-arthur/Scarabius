@@ -72,7 +72,7 @@ public class CollectibleItem : MonoBehaviour
             ItemCompendium.ItemData currentItem = new(ItemCompendium.Instance.itemGlossary[randomID].Name, ItemCompendium.Instance.itemGlossary[randomID].ID, ItemCompendium.Instance.itemGlossary[randomID].Description);
 
 
-            gameController.playerItems.Add(currentItem);
+            //gameController.playerItems.Add(currentItem);
             
             collected = false;
         }

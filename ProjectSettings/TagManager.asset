@@ -9,6 +9,10 @@ TagManager:
   - Wall
   - PlayerHitBox
   - EnemyHitbox
+  - Map
+  - ChestSpawnPoint
+  - Trap
+  - Chest
   layers:
   - Default
   - TransparentFX
@@ -16,7 +20,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Logo
   - 
   - 
   - 
@@ -54,4 +58,7 @@ TagManager:
     locked: 0
   - name: Bullet
     uniqueID: 4263110523
+    locked: 0
+  - name: UI
+    uniqueID: 126129215
     locked: 0
