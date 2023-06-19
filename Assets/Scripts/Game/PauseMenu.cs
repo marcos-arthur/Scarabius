@@ -42,6 +42,7 @@ public class PauseController : MonoBehaviour
     {
         Debug.Log("Sair do jogo");
         Application.Quit();
+        //SceneManager.LoadScene("Menu"); caso queiram mudar o quit para voltar ao menu.
 
     }
 }
