@@ -12,8 +12,7 @@ public class Projectile : MonoBehaviour
 
         if (isFromEnemy && collision.tag.Equals("PlayerHitBox"))
         {
-            // todo: player take damage 
-
+            collision.gameObject.GetComponentInParent<PlayerController>().damagePlayer(damage);
             Destroy(gameObject);
         }
         else if(!isFromEnemy && collision.tag.Equals("EnemyHitbox"))
