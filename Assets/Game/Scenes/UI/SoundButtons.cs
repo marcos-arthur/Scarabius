@@ -1,18 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SoundButtons : MonoBehaviour
 {
-    [SerializeField] AudioSource music;
+    private bool IsAudioMuted = false;
+    [SerializeField] private Sprite ButtonOn;
+    [SerializeField] private Sprite ButtonOff;
 
-    public void OnMusic(){
-        Debug.Log("Desmutado");
-        music.Play();
+    private void Start()
+    {
+        GetComponent<Button>().onClick.AddListener(ToggleMute);
     }
 
-    public void OffMusic(){
-        Debug.Log("Mutado");
-        music.Stop();
+    public void ToggleMute()
+    {
+        IsAudioMuted = !IsAudioMuted;
+        AudioController.Instance.MuteMaster(IsAudioMuted);
+
+        gameObject.GetComponent<Image>().sprite = IsAudioMuted ? ButtonOff : ButtonOn;
     }
 }
