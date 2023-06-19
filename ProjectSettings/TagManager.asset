@@ -13,6 +13,8 @@ TagManager:
   - ChestSpawnPoint
   - Trap
   - Chest
+  - Item
+  - LockedDoor
   layers:
   - Default
   - TransparentFX

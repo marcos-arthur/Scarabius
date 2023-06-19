@@ -10,9 +10,8 @@ public class CollectibleItem : MonoBehaviour
 
     public TextMeshProUGUI info;
 
-    public GameController gameController;
-    
-    
+    private GameController gameController;
+    private ItemCompendium compendium;
 
     public int randomID;
 
@@ -21,12 +20,12 @@ public class CollectibleItem : MonoBehaviour
     public string itemDescription = "Testing bro";
     public bool collected = false;
 
-
+    
     public ItemCompendium.ItemData currentItem;
 
     // Start is called before the first frame update
 
-    public void OnTriggerEnter2D(Collider2D collision)
+    /*public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
@@ -38,21 +37,17 @@ public class CollectibleItem : MonoBehaviour
             // Destroy the collectible item
             Destroy(gameObject);
         }
-    }
+    }*/
     void Start()
-
     {
+        compendium = ItemCompendium.Instance;
+        gameController = GameController.Instance;
 
-        
-        GameController gameController = FindObjectOfType<GameController>();
-
-        randomID = Random.Range(0, 4);
+        randomID = Random.Range(0, compendium.itemGlossary.Count);
 
         itemName = ItemCompendium.Instance.itemGlossary[randomID].Name;
         ItemCompendium.ItemData currentItem = new(ItemCompendium.Instance.itemGlossary[randomID].Name, ItemCompendium.Instance.itemGlossary[randomID].ID, ItemCompendium.Instance.itemGlossary[randomID].Description);
 
-
-        
 
         itemName = currentItem.Name;
         itemDescription = currentItem.Description;
@@ -67,7 +62,7 @@ public class CollectibleItem : MonoBehaviour
 
      void Update()
     {
-        if(collected == true)
+        /*if(collected == true)
         {
             ItemCompendium.ItemData currentItem = new(ItemCompendium.Instance.itemGlossary[randomID].Name, ItemCompendium.Instance.itemGlossary[randomID].ID, ItemCompendium.Instance.itemGlossary[randomID].Description);
 
@@ -75,7 +70,7 @@ public class CollectibleItem : MonoBehaviour
             //gameController.playerItems.Add(currentItem);
             
             collected = false;
-        }
+        }*/
     }
 
     

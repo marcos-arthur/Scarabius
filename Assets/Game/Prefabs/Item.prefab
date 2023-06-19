@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7589203021466145736}
   m_Layer: 0
   m_Name: Item
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,7 +134,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   info: {fileID: 0}
-  gameController: {fileID: 0}
   randomID: 0
   itemID: 0
   itemName: 
