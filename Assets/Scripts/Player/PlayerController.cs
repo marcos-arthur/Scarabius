@@ -31,10 +31,9 @@ public class PlayerController : MonoBehaviour
     // Changeable Values
     [SerializeField] private int bulletsInChamber, maxBullets;
     [SerializeField] private int hearts,maxHearts;
-    private bool invincible,isSpaceDown;
+    private bool invincible;
     private ItemCompendium.ItemData collectedItem;
     private CollectibleItem itemScript;
-    private float bTimer;
 
 
     // Mutipliers
@@ -76,21 +75,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag.Equals("Trap"))
         {
             this.damagePlayer(1);
-        }
-        if (isSpaceDown)
-        {
-            Debug.Log("Voc� apertou espa�o");
-            if (collision.gameObject.tag.Equals("Chest"))            
-            {
-                gameController.openChest(collision.gameObject);
-            }
-            else if (collision.gameObject.tag.Equals("Item"))
-            {
-                this.collectItem(collision.gameObject);
-            }
-            
-        }
-        
+        }               
     }
 
     // Update is called once per frame
@@ -152,20 +137,7 @@ public class PlayerController : MonoBehaviour
                     bullet.GetComponent<Projectile>().isFromEnemy = false;
                     bulletController.damage = 1;
                 }
-            }
-            isSpaceDown = Input.GetKeyDown(KeyCode.Space);
-            if (isSpaceDown)
-            {
-                bTimer += Time.deltaTime;
-                if (bTimer > 0.3)
-                {
-                    isSpaceDown = false;
-                }
-            }
-            else
-            {
-                bTimer = 0;
-            }
+            }            
             if (Input.GetKeyDown(KeyCode.F) && collectedItem.ID != -1)
             {
                 useItem();
@@ -247,8 +219,9 @@ public class PlayerController : MonoBehaviour
             if ((resistance - 0.5) >= 0.05) resistance -= 0.5;
             else resistance -= 0.5 - (resistance - 0.55);
         }
+        Debug.Log("Usei o Item " + collectedItem.Name);
         collectedItem = new ItemCompendium.ItemData("NULL",-1,"NULL");
-        Debug.Log("Usei um Item");
+        Debug.Log("Agora estou com o Item " + collectedItem.Name);
     }
     void damagePlayer(int damage)
     {
@@ -262,11 +235,12 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(StartInvincible());
         }
     }
-    void collectItem(GameObject item)
+    public void collectItem(GameObject item)
     {
         itemScript = item.GetComponent<CollectibleItem>();
         collectedItem = itemScript.currentItem;
-        Debug.Log("Coletei um Item");
+        Destroy(item);
+        Debug.Log(collectedItem.Name);
     }
     private IEnumerator StartInvincible()
     {

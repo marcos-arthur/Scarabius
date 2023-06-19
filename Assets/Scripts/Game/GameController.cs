@@ -21,17 +21,12 @@ public class GameController : MonoBehaviour
     private List<string> mapsPointer =  new List<string>{ "1", "2", "3", "4", "5" };
 
     // Changeable Variables
-    private GameObject[] ChestsSP;    
-    private GameObject map, newMap, newItem, newChest;
-    private List<GameObject> enemiesLeft;
+    private GameObject[] ChestsSP, enemiesLeft;    
+    private GameObject map, newMap, newItem, newChest,lockedDoor;    
 
     // Prefabs
     public GameObject chest,item;
-
-
-    // Lists Of Possible Sprites
-
-    public List<Sprite> traps, enemies, obstacles;
+    public List<GameObject> enemies;
 
     // Lists of Possible Spawn Points
 
@@ -68,25 +63,29 @@ public class GameController : MonoBehaviour
         
     }
 
-    void generateMap(Scene scene, LoadSceneMode mode)
-    {        
-            map = GameObject.FindWithTag("Map");
-            ChestsSP = GameObject.FindGameObjectsWithTag("ChestSpawnPoint");
-            generateChests();
-        
-    }
-
     // Update is called once per frame
     void FixedUpdate()
+    {            
+       if(!enemiesLeft.IsUnityNull() && enemiesLeft.Length > 0) enemiesLeft = GameObject.FindGameObjectsWithTag("Enemy");
+       else if(lockedDoor.activeSelf == false)
+        {
+            openDoor();
+        }
+    }
+    void generateMap(Scene scene, LoadSceneMode mode)
     {
-       /* Debug.Log(playerItems[0].Name + " " + playerItems[0].Description +" "+  playerItems[0].ID) ;
-        Debug.Log(playerItems[1].Name + " " + playerItems[1].Description + " " + playerItems[1].ID);*/
+        enemiesLeft = GameObject.FindGameObjectsWithTag("Enemy");
+        lockedDoor = GameObject.FindGameObjectWithTag("LockedDoor");
+        map = GameObject.FindGameObjectWithTag("Map");
+        ChestsSP = GameObject.FindGameObjectsWithTag("ChestSpawnPoint");
+        generateChests();
+        lockedDoor.SetActive(false);
     }
 
-    void loadMap()
+    public void loadMap()
     {
-        generator = Random.Range(0, mapsPointer.Count);
-        SceneManager.LoadScene("Level_" + mapsPointer[generator]);
+        generator = Random.Range(0, mapsPointer.Count+1);
+        SceneManager.LoadScene("Level_" + mapsPointer[generator]);  
         mapsPointer.Remove(mapsPointer[generator]);
         SceneManager.sceneLoaded += generateMap;
     }
@@ -94,26 +93,26 @@ public class GameController : MonoBehaviour
     {
         foreach (GameObject chestSP in ChestsSP)
         {
-            //generator = Random.Range(0, 2);            
-            generator = 1;
+            generator = Random.Range(0, 2);                        
             if (generator == 1)
             {
                 newChest = Instantiate(chest, chestSP.transform.position, Quaternion.identity);
-                newChest.transform.SetParent(map.transform);
+                //newChest.transform.SetParent(map.transform);
             }
         }
     }
     public void openChest(GameObject chest)
-    {
-        Debug.Log(chest);
-        Debug.Log("Você Abriu um baú");
+    {     
         newItem = Instantiate(item, chest.transform.position, Quaternion.identity);
         generator = Random.Range(0, compendium.itemGlossary.Count);
         aux = newItem.GetComponent<SpriteRenderer>();
         itemScript = newItem.GetComponent<CollectibleItem>();
-        aux.sprite = compendium.sprites[generator];
+        aux.sprite = compendium.sprites[generator];        
         itemScript.currentItem = compendium.itemGlossary[generator];
         Destroy(chest);
     }
-
+    void openDoor()
+    {
+        lockedDoor.active = true;
+    }
 }
