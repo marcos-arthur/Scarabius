@@ -76,6 +76,14 @@ public class GameController : MonoBehaviour
         
     }
 
+    public void Update()
+    {
+        if(gameOver)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {

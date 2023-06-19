@@ -239,8 +239,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 7107492973962061859, guid: 3256d207cbf2fc44abb73039ca9d12df, type: 3}
   firePoint: {fileID: 8611937145888175747}
+  heart: []
+  full: {fileID: -1630613846, guid: 8dee4727ebc1a4946a90f11f73e16716, type: 3}
+  empty: {fileID: -1284774605, guid: 8dee4727ebc1a4946a90f11f73e16716, type: 3}
   shotDelay: 0
   timeSinceLastShot: 0
+  gameController: {fileID: 0}
   bulletsInChamber: 0
   maxBullets: 0
   hearts: 0
